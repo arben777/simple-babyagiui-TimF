@@ -14,6 +14,8 @@ from pydantic.v1 import BaseModel, Field  # <-- Use v1 namespace error you're en
                                           #between Pydantic v1 and v2. Since LangChain internally uses Pydantic v1, you might be facing issues
                                           # due to the presence of v2.
 import traceback
+from config import investor_specific_prompts, DEFAULT_INVESTOR
+
 
 class TaskCreationChain(LLMChain):
     @classmethod
@@ -157,7 +159,7 @@ class BabyAGI(BaseModel):
 
     def print_next_task(self, task: Dict):
         st.subheader("Next Task:")
-        st.warning(t["task_name"])  # Only display the task_name
+        st.warning(["task_name"])  # Only display the task_name
 
     def print_task_result(self, result: str):
         st.subheader("Task Result")
@@ -263,18 +265,22 @@ def main():
 
         # Check if the API key is available
         if openai_api_key:
-
+            
             # The rest of your code remains unchanged. You can directly fetch objectives, tasks, etc.
             OBJECTIVE = st.text_input(
                 label=" 🏁 :orange[What's Your Ultimate Goal]: ",
                 value="Learn Python in 3 days",
             )
+            
+            # Default to the tasks for the investor specified in the config file
+            example_prompts = investor_specific_prompts.get(DEFAULT_INVESTOR, [])
 
-            first_task = st.text_input(
-                label=" 🥇:range[Initial task:] ",
-                value="Make a todo list",
+            # Display the tasks using radio buttons
+            first_task = st.radio(
+                label="🥇:range[Initial task:]",
+                options=example_prompts
             )
-
+            
             max_iterations = st.number_input(
                 " 💫 :orange[Max Iterations]: ", value=3, min_value=1, step=1
             )
@@ -300,7 +306,6 @@ def main():
     except Exception as e:
         st.error(f"An error occurred: {e}")
         st.error(traceback.format_exc())
-
 
 
 if __name__ == "__main__":
