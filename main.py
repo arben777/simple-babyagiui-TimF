@@ -47,9 +47,16 @@ class TaskCreationChain(LLMChain):
             incomplete_tasks=incomplete_tasks,
         )
         new_tasks = response.split("\n")
-        return [
-            {"task_name": task_name} for task_name in new_tasks if task_name.strip()
-        ]
+        refined_tasks = []
+        for task_name in new_tasks:
+            task_name = task_name.strip()
+            # Remove the "Task X: " prefix if it exists
+            if task_name.startswith("Task"):
+                task_name = ": ".join(task_name.split(":")[1:]).strip()
+            if task_name:
+                refined_tasks.append({"task_name": task_name})
+        return refined_tasks
+
 
 
 class TaskPrioritizationChain(LLMChain):
@@ -146,11 +153,11 @@ class BabyAGI(BaseModel):
     def print_task_list(self):
         st.text("Task List ⏰")
         for t in self.task_list:
-            st.write("- " + str(t["task_id"]) + ": " + t["task_name"])
+            st.write(t["task_name"])  # Only display the task_name
 
     def print_next_task(self, task: Dict):
         st.subheader("Next Task:")
-        st.warning("- " + str(task["task_id"]) + ": " + task["task_name"])
+        st.warning(t["task_name"])  # Only display the task_name
 
     def print_task_result(self, result: str):
         st.subheader("Task Result")
