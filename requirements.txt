@@ -1,0 +1,6 @@
+streamlit
+langchain==0.0.172
+openai
+tiktoken
+faiss-cpu
+pydantic==1.8.2
