@@ -1,5 +1,5 @@
 streamlit
-langchain==0.0.172
+langchain==0.0.127
 openai
 tiktoken
 faiss-cpu

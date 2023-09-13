@@ -10,7 +10,7 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.llms import BaseLLM
 from langchain.vectorstores import FAISS
 from langchain.vectorstores.base import VectorStore
-from pydantic.v1 import BaseModel, Field  # <-- Use v1 namespace error you're encountering seems to be related to a compatibility issue 
+from pydantic import BaseModel, Field  # <-- Use v1 namespace error you're encountering seems to be related to a compatibility issue 
                                           #between Pydantic v1 and v2. Since LangChain internally uses Pydantic v1, you might be facing issues
                                           # due to the presence of v2.
 import traceback
@@ -155,11 +155,11 @@ class BabyAGI(BaseModel):
     def print_task_list(self):
         st.text("Task List ⏰")
         for t in self.task_list:
-            st.write(t["task_name"])  # Only display the task_name
+            st.write("- " + str(t["task_id"]) + ": " + t["task_name"])
 
     def print_next_task(self, task: Dict):
         st.subheader("Next Task:")
-        st.warning(["task_name"])  # Only display the task_name
+        st.warning("- " + str(task["task_id"]) + ": " + task["task_name"])
 
     def print_task_result(self, result: str):
         st.subheader("Task Result")
@@ -256,10 +256,10 @@ def main():
     try:
         openai_api_key = os.getenv("OPENAI_API_KEY")
 
-        st.title("👶🏼 Baby-AGI 🤖 ")
+        st.title(f"👶🏼 Baby-AGI 🤖 Served by Elysium Innovations for {DEFAULT_INVESTOR}")
         st.markdown(
             """
-                > Powered by: 🦜 [LangChain](https://python.langchain.com/en/latest/use_cases/agents/baby_agi.html) + [Databutton](https://www.databutton.io) 💜 
+                > Powered by: 🌟🫶🤵🏽‍♂️ [Elysium](https://www.storydoc.com/2b6bb4f0d5017381b013e06bbe686991/e5734913-b29e-4de7-ba9f-dc7821b1eeb0/64f9b6d6f6664f000bfd26cc) + 👶🦾 [BabyAGI](https://babyagi.org) 💜 
             """
         )
 
@@ -269,7 +269,7 @@ def main():
             # The rest of your code remains unchanged. You can directly fetch objectives, tasks, etc.
             OBJECTIVE = st.text_input(
                 label=" 🏁 :orange[What's Your Ultimate Goal]: ",
-                value="Learn Python in 3 days",
+                value="Select a Goal from the examples below or type your own here!",
             )
             
             # Default to the tasks for the investor specified in the config file
