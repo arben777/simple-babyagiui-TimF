@@ -10,9 +10,10 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.llms import BaseLLM
 from langchain.vectorstores import FAISS
 from langchain.vectorstores.base import VectorStore
-from pydantic import BaseModel, Field
-
-openai_api_key = os.getenv("OPENAI_API_KEY")
+from pydantic.v1 import BaseModel, Field  # <-- Use v1 namespace error you're encountering seems to be related to a compatibility issue 
+                                          #between Pydantic v1 and v2. Since LangChain internally uses Pydantic v1, you might be facing issues
+                                          # due to the presence of v2.
+import traceback
 
 class TaskCreationChain(LLMChain):
     @classmethod
@@ -243,39 +244,37 @@ def initial_embeddings(openai_api_key, first_task):
 
 
 def main():
-    st.title("👶🏼 Baby-AGI 🤖 ")
-    st.markdown(
-        """
-            > Powerd by : 🦜 [LangChain](https://python.langchain.com/en/latest/use_cases/agents/baby_agi.html) + [Databutton](https://www.databutton.io) 💜 
-        """
-    )
-    # with st.sidebar:
-    openai_api_key = st.text_input(
-        "🔑 :orange[Insert Your OpenAI API KEY]:",
-        type="password",
-        placeholder="sk-",
-        key="pass",
-    )
-    if openai_api_key:
-        OBJECTIVE = st.text_input(
-            label=" 🏁 :orange[What's Your Ultimate Goal]: ",
-            value="Learn Python in 3 days",
+    try:
+        openai_api_key = os.getenv("OPENAI_API_KEY")
+
+        st.title("👶🏼 Baby-AGI 🤖 ")
+        st.markdown(
+            """
+                > Powered by: 🦜 [LangChain](https://python.langchain.com/en/latest/use_cases/agents/baby_agi.html) + [Databutton](https://www.databutton.io) 💜 
+            """
         )
 
-        first_task = st.text_input(
-            label=" 🥇:range[WInitial task:] ",
-            value="Make a todo list",
-        )
-        # first_task = "Make a todo list"
+        # Check if the API key is available
+        if openai_api_key:
 
-        max_iterations = st.number_input(
-            " 💫 :orange[Max Iterations]: ", value=3, min_value=1, step=1
-        )
+            # The rest of your code remains unchanged. You can directly fetch objectives, tasks, etc.
+            OBJECTIVE = st.text_input(
+                label=" 🏁 :orange[What's Your Ultimate Goal]: ",
+                value="Learn Python in 3 days",
+            )
 
-        vectorstore = initial_embeddings(openai_api_key, first_task)
+            first_task = st.text_input(
+                label=" 🥇:range[Initial task:] ",
+                value="Make a todo list",
+            )
 
-        if st.button(" 🪄 Let me perform the magic 👼🏼"):
-            try:
+            max_iterations = st.number_input(
+                " 💫 :orange[Max Iterations]: ", value=3, min_value=1, step=1
+            )
+
+            vectorstore = initial_embeddings(openai_api_key, first_task)
+
+            if st.button(" 🪄 Let me perform the magic 👼🏼"):
                 baby_agi = BabyAGI.from_llm_and_objectives(
                     llm=OpenAI(openai_api_key=openai_api_key),
                     vectorstore=vectorstore,
@@ -287,12 +286,14 @@ def main():
                     baby_agi.run(max_iterations=max_iterations)
 
                 st.balloons()
-            except Exception as e:
-                st.error(e)
-    else:
-        st.warning(
-            "OpenAI API KEY is necessary to get started."
-        )
+        else:
+            st.warning(
+                "OpenAI API KEY is not set in the environment."
+            )
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
+        st.error(traceback.format_exc())
+
 
 
 if __name__ == "__main__":
