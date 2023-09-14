@@ -269,14 +269,16 @@ def main():
 
             investor_prompts = investor_specific_prompts.get(DEFAULT_INVESTOR, {"objectives": [], "tasks": []})
 
+            st.markdown("## 🏁 What's Your Ultimate Goal:")
             OBJECTIVE = st.text_input(
-                label=f"🏁 What's Your Ultimate Goal:\n" + "\n".join(f"• {i+1}. {objective}" for i, objective in enumerate(investor_prompts['objectives'])),
-                value="Type your own goal here! or Copy and Paste one of the personalized example from above ^^",
+                "\n".join(f"• {i+1}. {objective}" for i, objective in enumerate(investor_prompts['objectives'])),
+                value="Type your own goal here!",
             )
 
+            st.markdown("## 🥇 Initial task:")
             first_task = st.text_input(
-                label=f"🥇 Initial task:\n" + "\n".join(f"• {i+1}. {task}" for i, task in enumerate(investor_prompts['tasks'])),
-                value="Type your own task here! or Copy and Paste one of the personalized example from above ^^",
+                "\n".join(f"• {i+1}. {task}" for i, task in enumerate(investor_prompts['tasks'])),
+                value="Type your own task here!",
             )
 
             max_iterations = st.number_input(
