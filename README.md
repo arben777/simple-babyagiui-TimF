@@ -1,7 +1,7 @@
 
 # Baby-AGI Investor Showcase
 
-Welcome to the Baby-AGI Investor Showcase! This application is designed to demonstrate the capabilities of our Baby-AGI system to potential investors. It provides an interactive interface where investors can input objectives and observe the AI in action, handling tasks, and completing objectives.
+Welcome to the Baby-AGI Investor Showcase! This application is designed to demonstrate the capabilities of a Baby-AGI system to potential investors. It provides an interactive interface where investors can input objectives and observe the AI in action, handling tasks, and completing objectives.
 
 ## Features:
 
