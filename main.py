@@ -266,16 +266,18 @@ def main():
         # Check if the API key is available
         if openai_api_key:
             
-            
+
             investor_prompts = investor_specific_prompts.get(DEFAULT_INVESTOR, {"objectives": [], "tasks": []})
 
-            OBJECTIVE = st.empty()
-            first_task = st.empty()
+            OBJECTIVE = st.text_input(
+                label=f"🏁 :orange[What's Your Ultimate Goal]: (e.g., {', '.join(investor_prompts['objectives'])})",
+                value="Type your own goal here!",
+            )
 
-            st.header("Objective")
-            for objective in investor_prompts['objectives']:
-                if st.button(f"Objective: {objective}"):
-                    OBJECTIVE.text_input("🏁 :orange[What's Your Ultimate Goal]:", value=objective)
+            first_task = st.text_input(
+                label=f"🥇:range[Initial task:] (e.g., {', '.join(investor_prompts['tasks'])})",
+                value="Type your own task here!",
+            )
 
             st.header("First Task")
             for task in investor_prompts['tasks']:
