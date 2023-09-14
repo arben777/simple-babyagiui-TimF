@@ -272,15 +272,17 @@ def main():
             OBJECTIVE = st.empty()
             first_task = st.empty()
 
-            st.header("Objectives")
+            st.header("Objective")
             for objective in investor_prompts['objectives']:
                 if st.button(f"Objective: {objective}"):
-                    OBJECTIVE.text_input("🏁 :orange[What's Your Ultimate Goal]:", value=objective)
+                    OBJECTIVE.text("🏁 :orange[What's Your Ultimate Goal]:")
+                    OBJECTIVE = st.text_input("", value=objective)
 
             st.header("First Task")
             for task in investor_prompts['tasks']:
                 if st.button(f"Task: {task}"):
-                    first_task.text_input("🥇:range[Initial task:]", value=task)
+                    first_task.text("🥇:range[Initial task:]")
+                    first_task = st.text_input("", value=task)
             
             max_iterations = st.number_input(
                 " 💫 :orange[Max Iterations]: ", value=3, min_value=1, step=1
