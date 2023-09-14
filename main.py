@@ -256,10 +256,10 @@ def main():
     try:
         openai_api_key = os.getenv("OPENAI_API_KEY")
 
-        st.title(f"👶🏼 Baby-AGI 🤖 Served by Elysium Innovations for {DEFAULT_INVESTOR}")
+        st.title(f"🧙🔮🤖 Elysium Task Wizard ✨🪄 made for {DEFAULT_INVESTOR}")
         st.markdown(
             """
-                > Powered by: 🌟🫶🤵🏽‍♂️ [Elysium](https://www.storydoc.com/2b6bb4f0d5017381b013e06bbe686991/e5734913-b29e-4de7-ba9f-dc7821b1eeb0/64f9b6d6f6664f000bfd26cc) + 👶🦾 [BabyAGI](https://babyagi.org) 💜 
+                > Powered by: 🌟🫶🤵🏽‍♂️ [Elysium Innovations](https://www.storydoc.com/2b6bb4f0d5017381b013e06bbe686991/e5734913-b29e-4de7-ba9f-dc7821b1eeb0/64f9b6d6f6664f000bfd26cc) 
             """
         )
 
