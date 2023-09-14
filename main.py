@@ -272,13 +272,13 @@ def main():
             st.markdown("## 🏁 What's Your Ultimate Goal:")
             OBJECTIVE = st.text_input(
                 "\n".join(f"• {i+1}. {objective}" for i, objective in enumerate(investor_prompts['objectives'])),
-                value="Type your own goal here!",
+                value="Type your own goal here! or Copy and Paste one of the personalized example from above ^^",
             )
 
             st.markdown("## 🥇 Initial task:")
             first_task = st.text_input(
                 "\n".join(f"• {i+1}. {task}" for i, task in enumerate(investor_prompts['tasks'])),
-                value="Type your own task here!",
+                value="Type your own task here! or Copy and Paste one of the personalized example from above ^^",
             )
 
             max_iterations = st.number_input(
