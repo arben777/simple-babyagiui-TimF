@@ -6,9 +6,11 @@ Welcome to the Baby-AGI Investor Showcase! This application is designed to demon
 ## Features:
 
 1. **Objective Input**: Investors can specify their own objective or choose from pre-defined prompts tailored to them.
-2. **Task Execution**: The Baby-AGI system can execute tasks based on the given objective and display the results in real-time.
-3. **Customized Experience**: The application can be easily customized with investor-specific example prompts, providing a personalized experience.
-4. **Intuitive Interface**: Powered by Streamlit, the interface is user-friendly and straightforward.
+2. **Task Management**: The application employs an AI-driven task management system that creates, prioritizes, and executes tasks based on user input.
+3. **LangChain Framework**: The application uses the LangChain framework, which aids in the intelligent generation and execution of tasks.
+4. **OpenAI Integration**: Leveraging the power of OpenAI, the application uses embeddings to assist in task-related operations.
+5. **Customized Experience**: The application can be easily customized with investor-specific example prompts, providing a personalized experience.
+6. **Intuitive Interface**: Powered by Streamlit, the interface is user-friendly and straightforward.
 
 ## Investor-specific Example Prompts:
 
@@ -19,7 +21,6 @@ To make the demo process smoother and more relatable, we've implemented a featur
 ### Customizing for a Specific Investor:
 
 1. **Configuration File**: The `config.py` file is where you can specify investor-specific example prompts. It provides a simple dictionary format for adding new investors and their associated prompts.
-
     ```python
     investor_specific_prompts = {
         "InvestorA": ["Prompt 1 for InvestorA", "Prompt 2 for InvestorA"],
@@ -28,7 +29,6 @@ To make the demo process smoother and more relatable, we've implemented a featur
     ```
 
 2. **Setting the Default Investor**: In the same `config.py` file, set the `DEFAULT_INVESTOR` variable to the name of the investor for whom you are preparing the application.
-
     ```python
     DEFAULT_INVESTOR = "InvestorA"
     ```
@@ -55,6 +55,13 @@ For making the app shareable and accessible to investors, deploy the application
     - Launch an EC2 instance.
     - SSH into the instance, clone your app, and install requirements.
     - Set environment variables and start the Streamlit app.
+
+#### Streamlit Deployment:
+
+To deploy using Streamlit:
+
+    - Ensure the `streamlit` library is included in your `requirements.txt`.
+    - Use any of the platforms above or Streamlit sharing to deploy your app. Refer to the Streamlit documentation for more specific guidance.
 
 #### Multiple Deployments:
 
