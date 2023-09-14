@@ -271,12 +271,12 @@ def main():
 
             OBJECTIVE = st.text_input(
                 label=f"🏁 What's Your Ultimate Goal:\n" + "\n".join(f"• {i+1}. {objective}" for i, objective in enumerate(investor_prompts['objectives'])),
-                value="Type your own goal here!",
+                value="Type your own goal here! or Copy and Paste one of the personalized example from above ^^",
             )
 
             first_task = st.text_input(
                 label=f"🥇 Initial task:\n" + "\n".join(f"• {i+1}. {task}" for i, task in enumerate(investor_prompts['tasks'])),
-                value="Type your own task here!",
+                value="Type your own task here! or Copy and Paste one of the personalized example from above ^^",
             )
 
             max_iterations = st.number_input(
