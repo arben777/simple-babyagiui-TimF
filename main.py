@@ -266,19 +266,17 @@ def main():
         # Check if the API key is available
         if openai_api_key:
             
-            # The rest of your code remains unchanged. You can directly fetch objectives, tasks, etc.
-            OBJECTIVE = st.text_input(
-                label=" 🏁 :orange[What's Your Ultimate Goal]: ",
-                value="Select a Goal from the examples below or type your own here!",
-            )
             
-            # Default to the tasks for the investor specified in the config file
-            example_prompts = investor_specific_prompts.get(DEFAULT_INVESTOR, [])
+            investor_prompts = investor_specific_prompts.get(DEFAULT_INVESTOR, {"objectives": [], "tasks": []})
 
-            # Display the tasks using radio buttons
-            first_task = st.radio(
-                label="🥇:range[Initial task:]",
-                options=example_prompts
+            OBJECTIVE = st.text_input(
+                label=f"🏁 :orange[What's Your Ultimate Goal]: (e.g., {', '.join(investor_prompts['objectives'])})",
+                value="Type your own goal here!",
+            )
+
+            first_task = st.text_input(
+                label=f"🥇:range[Initial task:] (e.g., {', '.join(investor_prompts['tasks'])})",
+                value="Type your own task here!",
             )
             
             max_iterations = st.number_input(
