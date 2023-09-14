@@ -269,15 +269,16 @@ def main():
             
             investor_prompts = investor_specific_prompts.get(DEFAULT_INVESTOR, {"objectives": [], "tasks": []})
 
-            OBJECTIVE = st.text_input(
-                label=f"🏁 :orange[What's Your Ultimate Goal]: (e.g., {', '.join(investor_prompts['objectives'])})",
-                value="Type your own goal here!",
-            )
+            OBJECTIVE = st.empty()
+            first_task = st.empty()
 
-            first_task = st.text_input(
-                label=f"🥇:range[Initial task:] (e.g., {', '.join(investor_prompts['tasks'])})",
-                value="Type your own task here!",
-            )
+            for objective in investor_prompts['objectives']:
+                if st.button(f"Objective: {objective}"):
+                    OBJECTIVE.text_input("🏁 :orange[What's Your Ultimate Goal]:", value=objective)
+
+            for task in investor_prompts['tasks']:
+                if st.button(f"Task: {task}"):
+                    first_task.text_input("🥇:range[Initial task:]", value=task)
             
             max_iterations = st.number_input(
                 " 💫 :orange[Max Iterations]: ", value=3, min_value=1, step=1
