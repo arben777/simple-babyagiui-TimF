@@ -272,10 +272,12 @@ def main():
             OBJECTIVE = st.empty()
             first_task = st.empty()
 
+            st.header("Objectives")
             for objective in investor_prompts['objectives']:
                 if st.button(f"Objective: {objective}"):
                     OBJECTIVE.text_input("🏁 :orange[What's Your Ultimate Goal]:", value=objective)
 
+            st.header("First Task")
             for task in investor_prompts['tasks']:
                 if st.button(f"Task: {task}"):
                     first_task.text_input("🥇:range[Initial task:]", value=task)
