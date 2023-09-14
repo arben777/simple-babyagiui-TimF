@@ -279,11 +279,6 @@ def main():
                 value="Type your own task here!",
             )
 
-            st.header("First Task")
-            for task in investor_prompts['tasks']:
-                if st.button(f"Task: {task}"):
-                    first_task.text_input("🥇:range[Initial task:]", value=task)
-            
             max_iterations = st.number_input(
                 " 💫 :orange[Max Iterations]: ", value=3, min_value=1, step=1
             )
