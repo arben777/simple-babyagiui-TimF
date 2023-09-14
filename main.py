@@ -271,13 +271,13 @@ def main():
 
             st.markdown("## 🏁 What's your Objective:")
             OBJECTIVE = st.text_input(
-                "\n".join(f"• {i+1}. {objective}" for i, objective in enumerate(investor_prompts['objectives'])),
+                "Alternative Example:\n" + "\n".join(f"• {i+1}. {objective}" for i, objective in enumerate(investor_prompts['objectives'])),
                 value="Open 5 new restaurant locations in emerging markets within a year.",
             )
 
             st.markdown("## 🥇 Give Wizard an Initial Task Towards Objecive:")
             first_task = st.text_input(
-                "\n".join(f"• {i+1}. {task}" for i, task in enumerate(investor_prompts['tasks'])),
+                "Alternative Example:\n" + "\n".join(f"• {i+1}. {task}" for i, task in enumerate(investor_prompts['tasks'])),
                 value="Study market trends, pinpoint top 3 emerging markets, and assess feasibility.",
             )
 
