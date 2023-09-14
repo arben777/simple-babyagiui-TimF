@@ -269,16 +269,16 @@ def main():
 
             investor_prompts = investor_specific_prompts.get(DEFAULT_INVESTOR, {"objectives": [], "tasks": []})
 
-            st.markdown("## 🏁 What's Your Ultimate Goal:")
+            st.markdown("## 🏁 What's your Objective:")
             OBJECTIVE = st.text_input(
                 "\n".join(f"• {i+1}. {objective}" for i, objective in enumerate(investor_prompts['objectives'])),
-                value="Type your own goal here! or Copy and Paste a personalized example from above ^^",
+                value="Open 5 new restaurant locations in emerging markets within a year.",
             )
 
-            st.markdown("## 🥇 Initial task:")
+            st.markdown("## 🥇 Give Wizard an Initial Task Towards Objecive:")
             first_task = st.text_input(
                 "\n".join(f"• {i+1}. {task}" for i, task in enumerate(investor_prompts['tasks'])),
-                value="Type your own task here! or Copy and Paste a personalized example from above ^^",
+                value="Study market trends, pinpoint top 3 emerging markets, and assess feasibility.",
             )
 
             max_iterations = st.number_input(
